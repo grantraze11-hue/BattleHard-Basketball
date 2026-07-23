@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Battlehard Basketball Club - Individual Training & Team Programs</title>
+  <style>
+    /* Styling for flyer / website document tab */
+    .flyer-container {
+      max-width: 850px;
+      margin: 20px auto;
+      padding: 30px;
+      background: #ffffff;
+      border: 1px solid #e0e0e0;
+      border-radius: 12px;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+      font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      color: #222222;
+      line-height: 1.6;
+    }
+
+    /* Header Accent */
+    .flyer-header {
+      text-align: center;
+      background: linear-gradient(135deg, #111111 0%, #222222 100%);
+      color: #ffffff;
+      padding: 30px 20px;
+      border-radius: 8px;
+      border-bottom: 5px solid #e65100; /* Basketball Orange */
+      margin-bottom: 30px;
+    }
+
+    .flyer-header h1 {
+      margin: 0;
+      font-size: 32px;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: #ffffff;
+    }
+
+    .flyer-header p {
+      margin: 8px 0 0 0;
+      font-size: 16px;
+      color: #e65100;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .section-title {
+      font-size: 20px;
+      font-weight: 800;
+      color: #111111;
+      border-bottom: 3px solid #e65100;
+      padding-bottom: 6px;
+      margin-top: 35px;
+      margin-bottom: 20px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    /* Clickable Training Card Wrapper */
+    .training-card-link {
+      display: block;
+      text-decoration: none;
+      color: inherit;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      border-radius: 8px;
+      margin-bottom: 30px;
+    }
+
+    .training-card-link:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px rgba(230, 81, 0, 0.2);
+    }
+
+    .training-card {
+      background-color: #fff8f5;
+      border: 2px solid #e65100;
+      border-radius: 8px;
+      padding: 25px;
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    .training-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      border-bottom: 1px dashed #e65100;
+      padding-bottom: 12px;
+    }
+
+    .training-header h3 {
+      margin: 0;
+      font-size: 22px;
+      color: #111;
+      text-transform: uppercase;
+    }
+
+    .price-tag {
+      background-color: #e65100;
+      color: #ffffff;
+      font-size: 20px;
+      font-weight: 800;
+      padding: 6px 16px;
+      border-radius: 20px;
+    }
+
+    .training-details-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 15px;
+      margin-top: 10px;
+    }
+
+    .detail-item {
+      background: #ffffff;
+      padding: 12px;
+      border-radius: 6px;
+      border: 1px solid #ffe0b2;
+    }
+
+    .detail-item strong {
+      display: block;
+      color: #e65100;
+      font-size: 13px;
+      text-transform: uppercase;
+    }
+
+    /* Team Programs Grid */
+    .teams-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+      gap: 20px;
+    }
+
+    .team-card {
+      background: #fdfdfd;
+      border: 1px solid #e0e0e0;
+      border-top: 4px solid #111111;
+      border-radius: 8px;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .team-card h4 {
+      margin: 0 0 10px 0;
+      font-size: 18px;
+      color: #111;
+      text-transform: uppercase;
+    }
+
+    .team-badge {
+      display: inline-block;
+      background: #eee;
+      color: #333;
+      font-size: 11px;
+      font-weight: 700;
+      padding: 3px 8px;
+      border-radius: 4px;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+
+    .option-box {
+      background: #f8f9fa;
+      border-left: 3px solid #e65100;
+      padding: 10px 12px;
+      margin-bottom: 10px;
+      font-size: 13.5px;
+    }
+
+    .option-box strong {
+      color: #111;
+    }
+
+    /* Buttons & Links */
+    .btn-register {
+      display: block;
+      text-align: center;
+      background-color: #e65100;
+      color: #ffffff;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 14px;
+      padding: 12px 18px;
+      border-radius: 6px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-top: 15px;
+      transition: background 0.2s, transform 0.1s;
+    }
+
+    .btn-register:hover {
+      background-color: #bf360c;
+    }
+
+    .btn-container {
+      display: flex;
+      gap: 15px;
+      margin-top: 30px;
+    }
+
+    .btn-print {
+      flex: 1;
+      background-color: #444444;
+      color: white;
+      border: none;
+      padding: 12px 20px;
+      font-size: 15px;
+      font-weight: 700;
+      border-radius: 6px;
+      cursor: pointer;
+      text-transform: uppercase;
+    }
+
+    .btn-print:hover {
+      background-color: #222222;
+    }
+
+    /* Footer Contact Info */
+    .flyer-footer {
+      text-align: center;
+      margin-top: 40px;
+      padding-top: 20px;
+      border-top: 1px solid #eee;
+      font-size: 14px;
+      color: #666;
+    }
+
+    /* Print & Mobile Styles */
+    @media print {
+      .btn-container, .btn-register { display: none; }
+      .flyer-container { box-shadow: none; border: none; padding: 0; }
+      body { background: white; }
+    }
+
+    @media (max-width: 600px) {
+      .teams-grid { grid-template-columns: 1fr; }
+      .training-header { flex-direction: column; align-items: flex-start; gap: 10px; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="flyer-container">
+
+  <!-- FLYER HEADER -->
+  <div class="flyer-header">
+    <h1>Battlehard Basketball Club</h1>
+    <p>Player Development & Competitive Teams</p>
+  </div>
+
+  <!-- SECTION 1: ENTIRE TRAINING CARD IS NOW A CLICKABLE LINK -->
+  <div class="section-title">1-on-1 Individual Skill Development</div>
+  
+  <a href="https://battlehardaaubasketball.com" target="_blank" class="training-card-link">
+    <div class="training-card">
+      <div class="training-header">
+        <h3>5-Week Individual Training Program</h3>
+        <span class="price-tag">$350</span>
+      </div>
+      
+      <p style="margin: 0; font-size: 14.5px; color: #333;">
+        Accelerate player performance with tailored, high-repetition 1-on-1 skill development sessions built specifically around shooting mechanics, ball handling, footwork, and decision-making under pressure.
+      </p>
+
+      <div class="training-details-grid">
+        <div class="detail-item">
+          <strong>Structure</strong>
+          5-Week Specialized Program
+        </div>
+        <div class="detail-item">
+          <strong>Session Duration</strong>
+          1 Hour per Session
+        </div>
+        <div class="detail-item">
+          <strong>Location</strong>
+          Kunkel Farm
+        </div>
+        <div class="detail-item">
+          <strong>Schedule</strong>
+          Agreed Upon Day & Time
+        </div>
+      </div>
+
+      <div class="btn-register">
+        Click to Register for Individual Training
+      </div>
+    </div>
+  </a>
+
+  <!-- SECTION 2: CLUB TEAM OPTIONS (ALL AGE DIVISIONS) -->
+  <div class="section-title">Team Programs (Elementary, Middle School & High School)</div>
+  <p style="margin-top: -10px; margin-bottom: 20px; font-size: 14px; color: #555;">
+    Battlehard Basketball offers competitive playing tracks across Elementary, Middle School, and High School age groups.
+  </p>
+
+  <div class="teams-grid">
+
+    <!-- ELEMENTARY DIVISION -->
+    <div class="team-card">
+      <div>
+        <span class="team-badge">Grades 3rd - 5th</span>
+        <h4>Elementary Division</h4>
+        
+        <div class="option-box">
+          <strong>League Play Track ($300 / Player)</strong>
+          <br>• Games played at <strong>Elite Athletics (Batavia, OH)</strong>
+          <br>• Includes <strong>Custom Team T-Shirt</strong>
+        </div>
+
+        <div class="option-box">
+          <strong>Tournament Track ($600 / Player)</strong>
+          <br>• Competitive Regional Tournament Schedule
+          <br>• Includes <strong>Full Team Uniform</strong>
+        </div>
+      </div>
+
+      <a href="https://battlehardaaubasketball.com" target="_blank" class="btn-register">
+        Register Elementary Player
+      </a>
+    </div>
+
+    <!-- MIDDLE SCHOOL DIVISION -->
+    <div class="team-card">
+      <div>
+        <span class="team-badge">Grades 6th - 8th</span>
+        <h4>Middle School Division</h4>
+        
+        <div class="option-box">
+          <strong>League Play Track ($300 / Player)</strong>
+          <br>• Games played at <strong>Elite Athletics (Batavia, OH)</strong>
+          <br>• Includes <strong>Custom Team T-Shirt</strong>
+        </div>
+
+        <div class="option-box">
+          <strong>Tournament Track ($600 / Player)</strong>
+          <br>• Competitive Regional Tournament Schedule
+          <br>• Includes <strong>Full Team Uniform</strong>
+        </div>
+      </div>
+
+      <a href="https://battlehardaaubasketball.com" target="_blank" class="btn-register">
+        Register Middle School Player
+      </a>
+    </div>
+
+    <!-- HIGH SCHOOL DIVISION -->
+    <div class="team-card" style="grid-column: span 1 / -1;">
+      <div>
+        <span class="team-badge">High School Squads</span>
+        <h4>High School Division</h4>
+        
+        <div class="option-box">
+          <strong>League Play Track ($300 / Player)</strong>
+          <br>• Games played at <strong>Elite Athletics (Batavia, OH)</strong>
+          <br>• Includes <strong>Custom Team T-Shirt</strong>
+        </div>
+
+        <div class="option-box">
+          <strong>Tournament Track ($600 / Player)</strong>
+          <br>• Showcase & Competitive Tournament Schedule
+          <br>• Includes <strong>Full Team Uniform</strong>
+        </div>
+      </div>
+
+      <a href="https://battlehardaaubasketball.com" target="_blank" class="btn-register">
+        Register High School Player
+      </a>
+    </div>
+
+  </div>
+
+  <!-- PRINT BUTTON -->
+  <div class="btn-container">
+    <button type="button" class="btn-print" onclick="window.print()">Print / Save Flyer PDF</button>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="flyer-footer">
+    <strong>Battlehard Basketball Club</strong> | Union, KY<br>
+    Questions & Inquiries: <strong>Battlehardbasketballclub@gmail.com</strong>
+  </div>
+
+</div>
+
+</body>
+</html>
