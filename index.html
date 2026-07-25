@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BattleHard Basketball Club</title>
+    <style>
+        /* ==========================================
+           COLOR SCHEME & BRAND BACKGROUND
+           ========================================== */
+        :root {
+            --maroon: #800000;         
+            --maroon-hover: #5a0000;   
+            --silver: #c0c0c0;         
+            --silver-light: #e0e0e0;   
+            --bg-dark: #0f0f11;        
+            --bg-card: rgba(26, 26, 26, 0.85); 
+            --text-main: #ffffff;      
+            --text-muted: #c0c0c0;     
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: radial-gradient(circle at top center, rgba(128, 0, 0, 0.5) 0%, rgba(15, 15, 17, 0.95) 60%),
+                        linear-gradient(135deg, #0f0f11 0%, #300000 50%, #0a0a0c 100%);
+            background-attachment: fixed;
+            color: var(--text-main);
+            min-height: 100vh;
+        }
+
+        /* Header Styles & Logo Integration */
+        header {
+            background-color: rgba(128, 0, 0, 0.9);
+            padding: 20px;
+            text-align: center;
+            border-bottom: 4px solid var(--silver);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .logo-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .team-logo-img {
+            width: 100%;
+            max-width: 180px;
+            height: auto;
+            margin-bottom: 5px;
+            filter: drop-shadow(0px 4px 10px rgba(0, 0, 0, 0.8));
+            transition: transform 0.3s ease;
+        }
+
+        .team-logo-img:hover {
+            transform: scale(1.03);
+        }
+
+        header h1 {
+            margin: 0;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: #ffffff;
+            font-size: 2.2rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.7);
+        }
+
+        header p {
+            margin: 5px 0 0 0;
+            color: var(--silver-light);
+            font-size: 1rem;
+            font-weight: 600;
+        }
+
+        /* Main Navigation */
+        .tab-nav {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            background-color: rgba(20, 20, 20, 0.9);
+            padding: 10px;
+            border-bottom: 1px solid #333;
+            backdrop-filter: blur(5px);
+        }
+
+        .tab-nav button {
+            background: none;
+            border: none;
+            color: var(--silver);
+            padding: 12px 24px;
+            margin: 5px;
+            cursor: pointer;
+            font-size: 15px;
+            font-weight: bold;
+            text-transform: uppercase;
+            transition: 0.3s;
+            border-bottom: 3px solid transparent;
+        }
+
+        .tab-nav button:hover, .tab-nav button.active {
+            color: #ffffff;
+            border-bottom: 3px solid var(--maroon);
+            background-color: rgba(128, 0, 0, 0.25);
+            border-radius: 4px 4px 0 0;
+        }
+
+        /* Section Containers */
+        .tab-content {
+            display: none;
+            padding: 30px 20px;
+            max-width: 1050px;
+            margin: 0 auto;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        h2 {
+            color: #ffffff;
+            border-bottom: 2px solid var(--maroon);
+            padding-bottom: 8px;
+            display: inline-block;
+            text-shadow: 1px 1px 2px #000;
+        }
+
+        /* Cards and Banners */
+        .card-box {
+            background: var(--bg-card);
+            border: 1px solid #333;
+            border-radius: 8px;
+            padding: 25px;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            backdrop-filter: blur(5px);
+        }
+
+        .card-box h3 {
+            color: #ffffff;
+            margin-top: 0;
+            border-bottom: 1px solid #444;
+            padding-bottom: 10px;
+        }
+
+        /* Typography & Content Links */
+        .content-link {
+            color: #ff9800;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.2s;
+        }
+
+        .content-link:hover {
+            color: #e65100;
+            text-decoration: underline;
+        }
+        
+        /* Buttons */
+        .shop-btn, .action-btn {
+            display: inline-block;
+            background-color: var(--maroon);
+            color: #ffffff;
+            padding: 12px 24px;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: bold;
+            border-radius: 4px;
+            border: 1px solid var(--silver);
+            transition: transform 0.2s ease, background-color 0.2s ease;
+            text-align: center;
+        }
+        
+        .shop-btn:hover, .action-btn:hover {
+            background-color: var(--maroon-hover);
+            transform: scale(1.02);
+            color: #ffffff;
+        }
+
+        /* Recruiting College Grid Styles */
+        .division-header {
+            background-color: #222;
+            padding: 10px 15px;
+            border-left: 4px solid var(--maroon);
+            margin-top: 25px;
+            margin-bottom: 15px;
+            font-size: 18px;
+            font-weight: bold;
+            color: var(--silver-light);
+        }
+
+        .college-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .college-card {
+            background-color: #1a1a1a;
+            border: 1px solid #444;
+            border-radius: 6px;
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: border-color 0.2s ease;
+        }
+
+        .college-card:hover {
+            border-color: var(--maroon);
+        }
+
+        .college-card h4 {
+            margin: 0 0 5px 0;
+            color: #ffffff;
+            font-size: 16px;
+        }
+
+        .college-card p {
+            margin: 0 0 15px 0;
+            font-size: 12px;
+            color: #888;
+        }
+
+        .college-btn {
+            background-color: #333;
+            color: #fff;
+            padding: 8px;
+            text-align: center;
+            text-decoration: none;
+            font-size: 12px;
+            font-weight: bold;
+            border-radius: 4px;
+            transition: background-color 0.2s;
+        }
+
+        .college-btn:hover {
+            background-color: var(--maroon);
+        }
+
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo-container">
+            <img src="battlehard_logo.png" alt="BattleHard Basketball Logo" class="team-logo-img">
+            <h1>BattleHard Basketball Club</h1>
+        </div>
+        <p>Head Coach: Coach Grant | Phone: (859) 640-7666</p>
+    </header>
+
+    <!-- MAIN TAB NAVIGATION -->
+    <div class="tab-nav">
+        <button id="tabBtnDashboard" onclick="openTab('dashboard', event)">Dashboard</button>
+        <button id="tabBtnRecruiting" class="active" onclick="openTab('recruiting', event)">Colleges & Recruiting</button>
+        <button id="tabBtnDocuments" onclick="openTab('documents', event)">Docs & Payments</button>
+        <button id="tabBtnStore" onclick="openTab('store', event)">Fan Store</button>
+        <button id="tabBtnSocials" onclick="openTab('socials', event)">Social Media</button>
+    </div>
+
+    <!-- ==========================================
+         TAB 2: COLLEGES & RECRUITING (REBUILT)
+         ========================================== -->
+    <section id="recruiting" class="tab-content active">
+        <h2>Recruiting, Academics & Beyond</h2>
+        <p style="color: var(--text-muted); margin-bottom: 25px;">Basketball is a tool to help you reach your academic and professional goals. Explore the resources below to register with the NCAA, secure academic funding, evaluate trade schools, and connect directly with college basketball programs.</p>
+
+        <!-- NCAA REGISTRATION SECTION -->
+        <div class="card-box" style="border-left: 5px solid #005eb8;">
+            <h3>NCAA Eligibility Center Registration</h3>
+            <p style="color: var(--silver-light); line-height: 1.5;">
+                Any student-athlete who wants to compete at an NCAA Division I or II school must create an <strong>Academic and Athletics Certification Account</strong> to receive their official NCAA ID. Division III athletes or undecided underclassmen should start by creating a free <strong>Profile Page</strong>.
+            </p>
+            <ul style="color: var(--silver); font-size: 14.5px; margin-bottom: 20px;">
+                <li>Ensure you use the exact legal name that appears on your high school transcripts.</li>
+                <li>Ask your high school guidance counselor to upload your official transcripts to the Eligibility Center at the end of each academic year.</li>
+            </ul>
+            <a href="https://web3.ncaa.org/ecwr3/" target="_blank" class="action-btn" style="background-color: #005eb8; border-color: #005eb8;">Get Your NCAA ID Here</a>
+        </div>
+
+        <!-- ACADEMIC SCHOLARSHIPS & KEES -->
+        <div class="card-box" style="border-left: 5px solid #ffcc00;">
+            <h3>KEES & Academic Scholarships</h3>
+            <p style="color: var(--silver-light); line-height: 1.5;">
+                Athletic scholarships are highly competitive, making academic excellence the most reliable pathway to funding your college education. Local programs heavily reward strong academic performance. 
+            </p>
+            
+            <h4 style="color: #ffffff; margin-bottom: 5px;">Kentucky Educational Excellence Scholarship (KEES)</h4>
+            <p style="color: var(--silver); font-size: 14.5px; line-height: 1.5; margin-top: 0;">
+                The Kentucky Educational Excellence Scholarship (KEES) is a program that allows students to earn money for college by achieving good grades in high school and qualifying scores on the ACT or SAT. To be eligible for a KEES yearly GPA award, high school students must earn at least a 2.5 GPA in any year of high school while meeting the KEES curriculum requirements. The better students perform academically, the more they can earn toward their college education. A student's KEES award expires when eight semesters of KEES funding has been used, five years have passed since high school graduation, or upon earning a bachelor's degree.
+            </p>
+            <a href="https://www.kheaa.com/web/scholarships-grants.faces" target="_blank" class="content-link">View Official KEES Requirements & KHEAA Portal &rarr;</a>
+
+            <h4 style="color: #ffffff; margin-top: 20px; margin-bottom: 5px;">FAFSA & Additional Aid</h4>
+            <p style="color: var(--silver); font-size: 14.5px; margin-top: 0;">
+                Regardless of your division level, all prospective student-athletes should fill out the <a href="https://studentaid.gov/h/apply-for-aid/fafsa" target="_blank" class="content-link">Free Application for Federal Student Aid (FAFSA)</a> during their senior year to qualify for Pell Grants and institution-specific academic grants.
+            </p>
+        </div>
+
+        <!-- TRADE SCHOOLS & VOCATIONAL PATHWAYS -->
+        <div class="card-box" style="border-left: 5px solid #4CAF50;">
+            <h3>Trade Schools & Vocational Pathways</h3>
+            <p style="color: var(--silver-light); line-height: 1.5;">
+                A traditional four-year university isn't the only path to a highly successful career. Trade schools, technical colleges, and vocational apprenticeships offer accelerated, specialized training for high-demand, high-paying industries (e.g., HVAC, electrical, welding, aviation mechanics, IT).
+            </p>
+            <ul style="color: var(--silver); font-size: 14.5px;">
+                <li><strong>Shorter Duration:</strong> Programs typically take 6 months to 2 years to complete.</li>
+                <li><strong>Lower Debt:</strong> Significantly reduced tuition costs compared to traditional 4-year institutions.</li>
+                <li><strong>Athletic Continuation:</strong> Many community and technical colleges feature NJCAA (Junior College) basketball programs, allowing you to play highly competitive basketball while earning your certification or preparing to transfer to a four-year university.</li>
+            </ul>
+            <a href="https://kctcs.edu/" target="_blank" class="content-link">Explore Kentucky Community & Technical College System (KCTCS) &rarr;</a>
+        </div>
+
+        <!-- COLLEGE ATHLETICS DIRECTORY -->
+        <div class="card-box">
+            <h3>Prospective Athlete Directory</h3>
+            <p style="color: var(--silver-light); font-size: 14px;">Below is a curated directory of regional college basketball programs. Click the link to go directly to their prospective student-athlete recruiting questionnaire. Fill these out completely to get into a coaching staff's recruiting database.</p>
+            
+            <input type="text" id="directorySearch" onkeyup="filterDirectory()" placeholder="Search for a college or university..." style="width: 100%; padding: 12px; margin-bottom: 10px; background: #2b2b2b; color: white; border: 1px solid var(--silver); border-radius: 4px; box-sizing: border-box;">
+
+            <!-- NCAA D1 -->
+            <div class="division-header">NCAA Division I</div>
+            <div class="college-grid">
+                <div class="college-card">
+                    <div>
+                        <h4>University of Kentucky</h4>
+                        <p>Lexington, KY | SEC</p>
+                    </div>
+                    <a href="https://ukathletics.com/" target="_blank" class="college-btn">Go to Athletics Page</a>
+                </div>
+                <div class="college-card">
+                    <div>
+                        <h4>Northern Kentucky Univ. (NKU)</h4>
+                        <p>Highland Heights, KY | Horizon</p>
+                    </div>
+                    <a href="https://nkunorse.com/sb_output.aspx?form=3" target="_blank" class="college-btn">Recruit Questionnaire</a>
+                </div>
+                <div class="college-card">
+                    <div>
+                        <h4>University of Cincinnati</h4>
+                        <p>Cincinnati, OH | Big 12</p>
+                    </div>
+                    <a href="https://gobearcats.com/sb_output.aspx?form=32" target="_blank" class="college-btn">Recruit Questionnaire</a>
+                </div>
+                <div class="college-card">
+                    <div>
+                        <h4>Xavier University</h4>
+                        <p>Cincinnati, OH | Big East</p>
+                    </div>
+                    <a href="https://goxavier.com/sb_output.aspx?form=4" target="_blank" class="college-btn">Recruit Questionnaire</a>
+                </div>
+                <div class="college-card">
+                    <div>
+                        <h4>Morehead State University</h4>
+                        <p>Morehead, KY | OVC</p>
+                    </div>
+                    <a href="https://msueagles.com/sb_output.aspx?form=3" target="_blank" class="college-btn">Recruit Questionnaire</a>
+                </div>
+                <div class="college-card">
+                    <div>
+                        <h4>Eastern Kentucky Univ. (EKU)</h4>
+                        <p>Richmond, KY | ASUN</p>
+                    </div>
+                    <a href="https://ekusports.com/sb_output.aspx?form=3" target="_blank" class="college-btn">Recruit Questionnaire</a>
+                </div>
+            </div>
+
+            <!-- NCAA D2 -->
+            <div class="division-header">NCAA Division II</div>
+            <div class="college-grid">
+                <div class="college-card">
+                    <div>
+                        <h4>Thomas More University</h4>
+                        <p>Crestview Hills, KY | G-MAC</p>
+                    </div>
+                    <a href="https://thomasmoresaints.com/sb_output.aspx?form=3" target="_blank" class="college-btn">Recruit Questionnaire</a>
+                </div>
+                <div class="college-card">
+                    <div>
+                        <h4>Kentucky State University</h4>
+                        <p>Frankfort, KY | SIAC</p>
+                    </div>
+                    <a href="https://ksuthorobreds.com/sb_output.aspx?form=3" target="_blank" class="college-btn">Recruit Questionnaire</a>
+                </div>
+                <div class="college-card">
+                    <div>
+                        <h4>Cedarville University</h4>
+                        <p>Cedarville, OH | G-MAC</p>
+                    </div>
+                    <a href="https://yellowjackets.cedarville.edu/sb_output.aspx?form=5" target="_blank" class="college-btn">Recruit Questionnaire</a>
+                </div>
+            </div>
+
+            <!-- NCAA D3 -->
+            <div class="division-header">NCAA Division III</div>
+            <div class="college-grid">
+                <div class="college-card">
+                    <div>
+                        <h4>Transylvania University</h4>
+                        <p>Lexington, KY | HCAC</p>
+                    </div>
+                    <a href="https://transysports.com/sb_output.aspx?form=3" target="_blank" class="college-btn">Recruit Questionnaire</a>
+                </div>
+                <div class="college-card">
+                    <div>
+                        <h4>Mount St. Joseph University</h4>
+                        <p>Cincinnati, OH | HCAC</p>
+                    </div>
+                    <a href="https://msjlions.com/sb_output.aspx?form=3" target="_blank" class="college-btn">Recruit Questionnaire</a>
+                </div>
+                <div class="college-card">
+                    <div>
+                        <h4>Centre College</h4>
+                        <p>Danville, KY | SAA</p>
+                    </div>
+                    <a href="https://centreathletics.com/sb_output.aspx?form=3" target="_blank" class="college-btn">Recruit Questionnaire</a>
+                </div>
+                <div class="college-card">
+                    <div>
+                        <h4>Wilmington College</h4>
+                        <p>Wilmington, OH | OAC</p>
+                    </div>
+                    <a href="https://wilmingtonquakers.com/sb_output.aspx?form=3" target="_blank" class="college-btn">Recruit Questionnaire</a>
+                </div>
+            </div>
+
+            <!-- NAIA -->
+            <div class="division-header">NAIA</div>
+            <div class="college-grid">
+                <div class="college-card">
+                    <div>
+                        <h4>Georgetown College</h4>
+                        <p>Georgetown, KY | Mid-South</p>
+                    </div>
+                    <a href="https://georgetowncollegeathletics.com/sb_output.aspx?form=3" target="_blank" class="college-btn">Recruit Questionnaire</a>
+                </div>
+                <div class="college-card">
+                    <div>
+                        <h4>Univ. of the Cumberlands</h4>
+                        <p>Williamsburg, KY | Mid-South</p>
+                    </div>
+                    <a href="https://cumberlandspatriots.com/sb_output.aspx?form=3" target="_blank" class="college-btn">Recruit Questionnaire</a>
+                </div>
+                <div class="college-card">
+                    <div>
+                        <h4>Lindsey Wilson College</h4>
+                        <p>Columbia, KY | Mid-South</p>
+                    </div>
+                    <a href="https://lindseyathletics.com/sb_output.aspx?form=3" target="_blank" class="college-btn">Recruit Questionnaire</a>
+                </div>
+            </div>
+            
+            <!-- JUCO -->
+            <div class="division-header">NJCAA (Junior College)</div>
+            <div class="college-grid">
+                <div class="college-card">
+                    <div>
+                        <h4>Vincennes University</h4>
+                        <p>Vincennes, IN | NJCAA Region 24</p>
+                    </div>
+                    <a href="https://govutrailblazers.com/sports/mbkb/index" target="_blank" class="college-btn">Athletics Page</a>
+                </div>
+                <div class="college-card">
+                    <div>
+                        <h4>Sinclair Community College</h4>
+                        <p>Dayton, OH | OCCAC</p>
+                    </div>
+                    <a href="https://sccpride.com/" target="_blank" class="college-btn">Athletics Page</a>
+                </div>
+            </div>
+            
+        </div>
+    </section>
+
+    <!-- (DASHBOARD, DOCUMENTS, STORE, SOCIALS TABS ARE OMITTED FOR BREVITY, 
+         RETAIN THE PREVIOUS HTML FOR THOSE SECTIONS) -->
+    
+    <script>
+        // Simple search filter for the directory
+        function filterDirectory() {
+            let input = document.getElementById('directorySearch').value.toLowerCase();
+            let cards = document.querySelectorAll('.college-card');
+            
+            cards.forEach(card => {
+                let text = card.innerText.toLowerCase();
+                if (text.includes(input)) {
+                    card.style.display = "flex";
+                } else {
+                    card.style.display = "none";
+                }
+            });
+        }
+
+        // Main Tab Switching
+        function openTab(tabId, evt) {
+            document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
+            document.querySelectorAll('.tab-nav button').forEach(btn => btn.classList.remove('active'));
+
+            // NOTE: Only "recruiting" exists in this snippet, but the logic remains for your full site integration.
+            let selectedTab = document.getElementById(tabId);
+            if(selectedTab) {
+                selectedTab.classList.add('active');
+            }
+            if (evt && evt.currentTarget) {
+                evt.currentTarget.classList.add('active');
+            } 
+        }
+    </script>
+</body>
+</html>
