@@ -1,0 +1,1655 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BattleHard Basketball Club</title>
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        /* ==========================================
+           COLOR SCHEME & BRAND BACKGROUND
+           ========================================== */
+        :root {
+            --maroon: #800000;         
+            --maroon-hover: #5a0000;   
+            --silver: #c0c0c0;         
+            --silver-light: #e0e0e0;   
+            --bg-dark: #0f0f11;        
+            --bg-card: rgba(26, 26, 26, 0.85); 
+            --text-main: #ffffff;      
+            --text-muted: #c0c0c0;     
+            --accent-gold: #f39c12;
+            --accent-blue: #1976d2;
+            --accent-green: #00c853;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: radial-gradient(circle at top center, rgba(128, 0, 0, 0.5) 0%, rgba(15, 15, 17, 0.95) 60%),
+                        linear-gradient(135deg, #0f0f11 0%, #300000 50%, #0a0a0c 100%);
+            background-attachment: fixed;
+            color: var(--text-main);
+            min-height: 100vh;
+        }
+
+        /* Header Styles & Logo Integration */
+        header {
+            background-color: rgba(128, 0, 0, 0.9);
+            padding: 20px;
+            text-align: center;
+            border-bottom: 4px solid var(--silver);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .logo-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .team-logo-img {
+            width: 100%;
+            max-width: 180px;
+            height: auto;
+            margin-bottom: 5px;
+            filter: drop-shadow(0px 4px 10px rgba(0, 0, 0, 0.8));
+            transition: transform 0.3s ease;
+        }
+
+        .team-logo-img:hover {
+            transform: scale(1.03);
+        }
+
+        header h1 {
+            margin: 0;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: #ffffff;
+            font-size: 2.2rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.7);
+        }
+
+        header p {
+            margin: 5px 0 0 0;
+            color: var(--silver-light);
+            font-size: 1rem;
+            font-weight: 600;
+        }
+
+        header a {
+            color: #ffffff;
+            text-decoration: underline;
+        }
+
+        /* Main Navigation */
+        .tab-nav {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            background-color: rgba(20, 20, 20, 0.9);
+            padding: 10px;
+            border-bottom: 1px solid #333;
+            backdrop-filter: blur(5px);
+        }
+
+        .tab-nav button {
+            background: none;
+            border: none;
+            color: var(--silver);
+            padding: 12px 24px;
+            margin: 5px;
+            cursor: pointer;
+            font-size: 15px;
+            font-weight: bold;
+            text-transform: uppercase;
+            transition: 0.3s;
+            border-bottom: 3px solid transparent;
+        }
+
+        .tab-nav button:hover, .tab-nav button.active {
+            color: #ffffff;
+            border-bottom: 3px solid var(--maroon);
+            background-color: rgba(128, 0, 0, 0.25);
+            border-radius: 4px 4px 0 0;
+        }
+
+        /* Section Containers */
+        .tab-content {
+            display: none;
+            padding: 30px 20px;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        h2 {
+            color: #ffffff;
+            border-bottom: 2px solid var(--maroon);
+            padding-bottom: 8px;
+            display: inline-block;
+            text-shadow: 1px 1px 2px #000;
+        }
+
+        /* Cards and Banners */
+        .card-box {
+            background: var(--bg-card);
+            border: 1px solid #333;
+            border-radius: 8px;
+            padding: 25px;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            backdrop-filter: blur(5px);
+        }
+        
+        .scholarship-card {
+            border-left: 5px solid #00d632;
+        }
+
+        .banner-tournament {
+            background: linear-gradient(135deg, rgba(128,0,0,0.9), rgba(40,0,0,0.95));
+            border: 2px solid var(--silver);
+            border-radius: 8px;
+            padding: 25px;
+            margin-bottom: 25px;
+            text-align: center;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.4);
+        }
+
+        .banner-tournament h3 {
+            margin: 0 0 10px 0;
+            font-size: 24px;
+            color: #fff;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .tag-badge {
+            background-color: var(--silver);
+            color: #000;
+            padding: 4px 10px;
+            font-weight: bold;
+            border-radius: 4px;
+            font-size: 12px;
+            display: inline-block;
+            margin-bottom: 10px;
+        }
+        
+        /* Buttons & Social Icons */
+        .shop-btn, .submit-btn {
+            display: inline-block;
+            background-color: var(--maroon);
+            color: #ffffff;
+            padding: 12px 24px;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: bold;
+            border-radius: 4px;
+            border: 1px solid var(--silver);
+            cursor: pointer;
+            transition: transform 0.2s ease, background-color 0.2s ease;
+        }
+        
+        .shop-btn:hover, .submit-btn:hover {
+            background-color: var(--maroon-hover);
+            transform: scale(1.02);
+            color: #ffffff;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 20px;
+            justify-content: flex-start;
+            padding: 15px 0 5px 0;
+        }
+
+        .social-links a {
+            color: var(--silver-light);
+            font-size: 28px;
+            transition: color 0.3s ease, transform 0.2s ease;
+        }
+
+        .social-links a:hover {
+            color: var(--accent-gold);
+            transform: translateY(-3px);
+        }
+
+        /* Sponsor Section Styles */
+        .sponsors-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin-top: 15px;
+        }
+
+        .sponsor-card {
+            background: rgba(20, 20, 20, 0.9);
+            border: 1px solid var(--silver);
+            border-radius: 8px;
+            padding: 25px;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+            transition: transform 0.3s ease, border-color 0.3s ease;
+        }
+
+        .sponsor-card:hover {
+            transform: translateY(-4px);
+            border-color: var(--maroon);
+        }
+
+        .sponsor-img {
+            max-width: 100%;
+            height: 140px;
+            object-fit: contain;
+            margin-bottom: 15px;
+            filter: drop-shadow(0 2px 6px rgba(255,255,255,0.1));
+            background-color: #ffffff;
+            padding: 10px;
+            border-radius: 6px;
+        }
+
+        /* Programs Grid Layout (What We Offer Tab) */
+        .offerings-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(310px, 1fr));
+            gap: 25px;
+            margin-top: 25px;
+            margin-bottom: 35px;
+        }
+
+        .offer-block {
+            background: rgba(20, 20, 20, 0.92);
+            border: 1px solid #333;
+            border-top: 5px solid var(--maroon);
+            border-radius: 10px;
+            padding: 25px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            box-shadow: 0 5px 18px rgba(0,0,0,0.4);
+            transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+        }
+
+        .offer-block:hover {
+            transform: translateY(-4px);
+            border-color: var(--silver);
+            box-shadow: 0 8px 22px rgba(0,0,0,0.6);
+        }
+
+        .offer-block.featured-block {
+            border-top-color: #e65100;
+            background: rgba(30, 24, 20, 0.95);
+        }
+
+        .offer-block.highlight-blue {
+            border-top-color: #1976d2;
+        }
+
+        .offer-block.highlight-green {
+            border-top-color: #00d632;
+        }
+
+        .offer-block h3 {
+            margin-top: 0;
+            font-size: 22px;
+            color: #fff;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .offer-block p {
+            color: var(--silver-light);
+            font-size: 14.5px;
+            line-height: 1.55;
+        }
+
+        .offer-block ul {
+            list-style: none;
+            padding: 0;
+            margin: 15px 0;
+            font-size: 14px;
+            color: var(--silver);
+        }
+
+        .offer-block ul li {
+            padding: 7px 0;
+            border-bottom: 1px dashed #333;
+        }
+
+        .offer-block ul li strong {
+            color: #fff;
+        }
+
+        .price-display {
+            font-size: 22px;
+            font-weight: bold;
+            color: #e65100;
+            margin: 10px 0;
+        }
+
+        /* Form Styles */
+        .form-container {
+            background: var(--bg-card);
+            border: 1px solid #333;
+            border-radius: 8px;
+            padding: 30px;
+            margin-top: 20px;
+        }
+
+        .form-header-box {
+            text-align: center;
+            border-bottom: 3px solid var(--maroon);
+            padding-bottom: 18px;
+            margin-bottom: 25px;
+        }
+
+        .form-header-box h3 {
+            margin: 0;
+            font-size: 24px;
+            color: #ffffff;
+            text-transform: uppercase;
+        }
+
+        .section-title {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--silver-light);
+            border-bottom: 2px solid var(--maroon);
+            padding-bottom: 6px;
+            margin-top: 35px;
+            margin-bottom: 18px;
+            text-transform: uppercase;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+
+        .full-width { grid-column: span 2; }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group label {
+            font-size: 13px;
+            font-weight: 600;
+            margin-bottom: 6px;
+            color: var(--silver);
+        }
+
+        .form-group input, 
+        .form-group select,
+        .form-group textarea {
+            padding: 10px 12px;
+            border: 1px solid var(--silver);
+            background-color: #2b2b2b;
+            color: #ffffff;
+            border-radius: 4px;
+            font-size: 14px;
+            box-sizing: border-box;
+            font-family: inherit;
+        }
+
+        .contract-box {
+            background-color: #222222;
+            border-left: 4px solid var(--maroon);
+            padding: 16px;
+            font-size: 13.5px;
+            color: var(--silver-light);
+            margin-bottom: 15px;
+            border-radius: 0 4px 4px 0;
+            max-height: 180px;
+            overflow-y: auto;
+        }
+
+        .checkbox-option {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 14px;
+            font-weight: 600;
+            color: #ffffff;
+            cursor: pointer;
+            margin: 10px 0;
+        }
+
+        /* Colleges & Recruiting Levels Grid Styles */
+        .level-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 20px;
+            margin: 20px 0 35px 0;
+        }
+
+        .level-card {
+            background-color: rgba(22, 22, 25, 0.95);
+            border: 1px solid #333;
+            border-top: 4px solid var(--silver);
+            border-radius: 8px;
+            padding: 22px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+            transition: transform 0.25s ease, border-color 0.25s ease;
+        }
+
+        .level-card:hover {
+            transform: translateY(-4px);
+            border-color: var(--maroon);
+        }
+
+        .level-card.badge-d1 { border-top-color: #d32f2f; }
+        .level-card.badge-d2 { border-top-color: #1976d2; }
+        .level-card.badge-d3 { border-top-color: #388e3c; }
+        .level-card.badge-naia { border-top-color: #f57c00; }
+        .level-card.badge-juco { border-top-color: #7b1fa2; }
+        .level-card.badge-eligibility { border-top-color: #00bcd4; }
+        .level-card.badge-academic { border-top-color: #e91e63; }
+
+        .level-card h3 {
+            margin: 0 0 8px 0;
+            font-size: 20px;
+            color: #ffffff;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .level-card .level-desc {
+            font-size: 13.5px;
+            color: var(--silver-light);
+            line-height: 1.5;
+            margin-bottom: 15px;
+        }
+
+        .level-card ul {
+            list-style: none;
+            padding: 0;
+            margin: 0 0 18px 0;
+            font-size: 13px;
+            color: var(--silver);
+        }
+
+        .level-card ul li {
+            padding: 4px 0;
+            border-bottom: 1px dashed rgba(255,255,255,0.1);
+        }
+
+        .level-card ul li strong {
+            color: #fff;
+        }
+
+        .level-card .action-btn {
+            display: inline-block;
+            text-align: center;
+            background: rgba(255,255,255,0.08);
+            color: #fff;
+            padding: 10px 16px;
+            border-radius: 4px;
+            border: 1px solid var(--silver);
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 13.5px;
+            transition: all 0.2s ease;
+        }
+
+        .level-card .action-btn:hover {
+            background: var(--maroon);
+            border-color: var(--silver-light);
+            color: #ffffff;
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 15px;
+            margin: 15px 0;
+        }
+
+        .college-card {
+            background-color: var(--bg-card);
+            padding: 15px 20px;
+            border-radius: 8px;
+            border: 1px solid #333;
+            border-left: 5px solid var(--maroon);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: 0.3s;
+        }
+        
+        a.college-card:hover {
+            border-color: var(--silver-light);
+            background-color: rgba(40, 40, 40, 0.95);
+        }
+
+        .hidden { display: none !important; }
+
+        /* Printable One-Pager Styling */
+        @media print {
+            body {
+                background: #ffffff !important;
+                color: #000000 !important;
+            }
+            header, .tab-nav, .sponsors-grid, .banner-tournament, #gc-schedule-widget-fie6, .shop-btn, .social-links, button, #collegeSearch, #collegeList, .scholarship-card {
+                display: none !important;
+            }
+            .tab-content { display: none !important; }
+            #recruiting.tab-content { display: block !important; padding: 0 !important; }
+            .card-box { border: 1px solid #000 !important; background: #fff !important; color: #000 !important; box-shadow: none !important; }
+            .section-title { color: #800000 !important; border-bottom: 2px solid #800000 !important; }
+            input, select, textarea { border: none !important; background: transparent !important; color: #000 !important; font-weight: bold; }
+        }
+
+        @media (max-width: 768px) {
+            .form-grid { grid-template-columns: 1fr; }
+            .full-width { grid-column: span 1; }
+            .team-logo-img { max-width: 140px; }
+            .social-links { justify-content: center; }
+            .offerings-grid, .level-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo-container">
+            <img src="battlehard_logo.png" alt="BattleHard Basketball Logo" class="team-logo-img">
+            <h1>Battle Hard Basketball Club</h1>
+        </div>
+        <p>Head Coach: Coach Grant | Phone: (859) 640-7666 | Email: <a href="mailto:battlehardbasketballclub@gmail.com">battlehardbasketballclub@gmail.com</a></p>
+    </header>
+
+    <!-- MAIN TAB NAVIGATION -->
+    <div class="tab-nav">
+        <button id="tabBtnDashboard" class="active" onclick="openTab('dashboard', event)">Dashboard</button>
+        <button id="tabBtnOffer" onclick="openTab('offer', event)">What We Offer</button>
+        <button id="tabBtnRecruiting" onclick="openTab('recruiting', event)">Sports & Academic Liaison</button>
+        <button id="tabBtnDocuments" onclick="openTab('documents', event)">Docs & Registration</button>
+        <button id="tabBtnStore" onclick="openTab('store', event)">Fan Store</button>
+    </div>
+
+    <!-- TAB 1: DASHBOARD -->
+    <section id="dashboard" class="tab-content active">
+        
+        <!-- TOURNAMENT BANNER -->
+        <div class="banner-tournament" style="border-color: #00d632;">
+            <span class="tag-badge" style="background-color: #00d632; color: #000;">TOURNAMENT RESULTS</span>
+            <h3>8th Grade Boys: Tournament Runner-Up!</h3>
+            <p style="margin: 5px 0; font-size: 16px; font-weight: bold; color: var(--silver-light);">
+                Elite Athletics Tournament
+            </p>
+            <p style="font-size: 15px; margin: 10px 0;">
+                📍 <strong>Location:</strong> Elite Athletics (Batavia, OH)
+            </p>
+            <p style="font-size: 13.5px; color: var(--silver);">
+                • Incredible effort fighting through 3 consecutive games to close out the season! •
+            </p>
+        </div>
+
+        <!-- GAMECHANGER LIVE SCORE TRACKER & SCHEDULE WIDGET -->
+        <div class="card-box" style="border-left: 5px solid var(--maroon);">
+            <h3 style="margin-top:0; color: #fff;">🏀 Live Score Tracker & Game Schedule</h3>
+            <p style="color: var(--text-muted); margin-bottom: 15px; font-size: 14px;">Real-time scores, schedule, and team stats powered by GameChanger.</p>
+            
+            <div id="gc-schedule-widget-fie6"></div>
+        </div>
+        
+        <!-- QUICK OFFERING OVERVIEW BANNER -->
+        <div class="card-box" style="border-left: 5px solid #e65100; text-align: center;">
+            <h3 style="margin-top:0; color: #fff;">🔥 Discover Our Programs & Training Packages</h3>
+            <p style="font-size: 15px; color: var(--silver-light); margin-bottom: 18px;">
+                From Starters (5U-9U) to High School Showcase teams, Fall Basketball, and 1-on-1 Private Training—explore everything we offer on our dedicated page.
+            </p>
+            <button onclick="openTab('offer')" class="shop-btn" style="background-color: #e65100; border-color: #ffb74d;">
+                View All Programs & Packages
+            </button>
+        </div>
+
+        <div class="card-box" style="border-left: 5px solid var(--maroon); text-align: center;">
+            <h3 style="margin-top:0; color: #fff;">🛒 Official Fan Store is Open!</h3>
+            <p style="font-size: 16px; color: var(--silver-light); margin-bottom: 15px;">
+                Get your official BattleHard Basketball Club gear today. The team store is fully stocked with new apparel for the season.
+            </p>
+            <a href="https://teamlocker.squadlocker.com/stores/battlehard-aau-3132815" target="_blank" class="shop-btn">
+                Shop Team Gear Now
+            </a>
+        </div>
+
+        <h2 style="margin-top: 20px;">Official Team Sponsors</h2>
+        <p style="color: var(--text-muted);">We are proud to partner with local businesses supporting youth athletics and the BattleHard community.</p>
+        <div class="sponsors-grid">
+            <div class="sponsor-card">
+                <img src="union42_logo.png" alt="Union 42 Bourbon & Brew - Juice Club Member Logo" class="sponsor-img">
+                <h3 style="margin: 0 0 5px 0; color: #fff; font-size: 20px;">Union 42 Bourbon & Brew</h3>
+                <span class="tag-badge" style="background-color: var(--maroon); color: #fff; border: 1px solid var(--silver);">
+                    Juice Club Member • Est. 2018
+                </span>
+                <p style="font-size: 14px; color: var(--silver-light); margin-top: 10px;">
+                    📍 <strong>Union, Kentucky</strong><br>
+                    Proud Official Sponsor & Partner of BattleHard Basketball Club
+                </p>
+            </div>
+        </div>
+
+        <div class="card-box" style="margin-top: 30px;">
+            <h3 style="margin-top:0;">Contact & Official Socials</h3>
+            <p><strong>Head Coach:</strong> Coach Grant</p>
+            <p><strong>Direct Line / Text:</strong> <span style="color: var(--silver-light); font-weight: bold;">(859) 640-7666</span></p>
+            <p><strong>Email:</strong> <a href="mailto:battlehardbasketballclub@gmail.com" style="color: var(--silver-light); font-weight: bold; text-decoration: underline;">battlehardbasketballclub@gmail.com</a></p>
+            
+            <div class="social-links">
+                <a href="https://www.instagram.com/fbabasketball1?igsh=MWYyM2hqbjJkOWcxNQ%3D%3D&utm_source=qr" target="_blank" aria-label="Instagram">
+                    <i class="fab fa-instagram"></i>
+                </a>
+                <a href="https://www.facebook.com/profile.php?id=61572883591294" target="_blank" aria-label="Facebook">
+                    <i class="fab fa-facebook-f"></i>
+                </a>
+                <a href="https://www.tiktok.com/@battlehardbasketball?_r=1&_t=ZP-98Uciu8DZZ1" target="_blank" aria-label="TikTok">
+                    <i class="fab fa-tiktok"></i>
+                </a>
+                <a href="https://youtube.com/@battlehardbasketballclb" target="_blank" aria-label="YouTube">
+                    <i class="fab fa-youtube"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- TAB 2: WHAT WE OFFER -->
+    <section id="offer" class="tab-content">
+        <h2>What We Offer</h2>
+        <p style="color: var(--text-muted);">Explore our complete lineup of competitive team divisions, youth intro programs, skill training sessions, and seasonal leagues.</p>
+
+        <div class="offerings-grid">
+
+            <!-- BLOCK 1: ELEMENTARY -->
+            <div class="offer-block">
+                <div>
+                    <span class="tag-badge" style="background-color: var(--maroon); color: #fff;">3rd - 5th Grade</span>
+                    <h3><i class="fas fa-child" style="color: var(--silver);"></i> Elementary Division</h3>
+                    <div class="price-display">$375 - $475 <span style="font-size: 13px; color: var(--silver);">/ player</span></div>
+                    <p>
+                        Comprehensive team options for elementary student-athletes focused on mastering core fundamentals, team play, and competitive development.
+                    </p>
+                    <ul>
+                        <li><strong>League Play Team ($375):</strong> SWOL / Local League Play, 1x practice/week, T-shirt & shorts included</li>
+                        <li><strong>Local Tournament Team ($475):</strong> Weekend regional tournaments in KY & OH, 2x practice/week, full reversible uniform</li>
+                        <li><strong>Focus:</strong> Ball handling, defensive fundamentals, decision making, court awareness</li>
+                    </ul>
+                </div>
+                <a href="#documents" onclick="selectProgramAndGo('League Play Team ($375)')" class="shop-btn" style="text-align: center; margin-top: 15px;">
+                    Register Elementary
+                </a>
+            </div>
+
+            <!-- BLOCK 2: MIDDLE SCHOOL -->
+            <div class="offer-block">
+                <div>
+                    <span class="tag-badge" style="background-color: var(--maroon); color: #fff;">6th - 8th Grade</span>
+                    <h3><i class="fas fa-users" style="color: var(--silver);"></i> Middle School Division</h3>
+                    <div class="price-display">$375 - $750 <span style="font-size: 13px; color: var(--silver);">/ player</span></div>
+                    <p>
+                        Tiered team options tailored for middle school athletes seeking local league play or high-exposure regional tournament travel.
+                    </p>
+                    <ul>
+                        <li><strong>League Play Team ($375):</strong> Local league games at Elite Athletics (Batavia, OH), no travel required</li>
+                        <li><strong>Local Tournament Team ($475):</strong> Competitive tournament schedule across KY & OH</li>
+                        <li><strong>Elite Travel Team ($750 New / $600 Ret):</strong> Premier regional travel track with full custom uniform package</li>
+                    </ul>
+                </div>
+                <a href="#documents" onclick="selectProgramAndGo('League Play Team ($375)')" class="shop-btn" style="text-align: center; margin-top: 15px;">
+                    Register Middle School
+                </a>
+            </div>
+
+            <!-- BLOCK 3: HIGH SCHOOL -->
+            <div class="offer-block">
+                <div>
+                    <span class="tag-badge" style="background-color: var(--maroon); color: #fff;">9th - 12th Grade</span>
+                    <h3><i class="fas fa-award" style="color: var(--silver);"></i> High School Division</h3>
+                    <div class="price-display">$375 - $750 <span style="font-size: 13px; color: var(--silver);">/ player</span></div>
+                    <p>
+                        High-level competitive teams engineered for high school players striving for varsity prep, exposure, and college recruitment opportunities.
+                    </p>
+                    <ul>
+                        <li><strong>League Play Team ($375):</strong> Competitive local league competition</li>
+                        <li><strong>Local Tournament Team ($475):</strong> Regional weekend tournament circuit</li>
+                        <li><strong>Elite Showcase Travel Team ($750 New / $600 Ret):</strong> Showcase travel in Tri-State, NC, SC, & FL (NCAA ID required)</li>
+                    </ul>
+                </div>
+                <a href="#documents" onclick="selectProgramAndGo('League Play Team ($375)')" class="shop-btn" style="text-align: center; margin-top: 15px;">
+                    Register High School
+                </a>
+            </div>
+
+            <!-- BLOCK 4: STARTERS -->
+            <div class="offer-block featured-block">
+                <div>
+                    <span class="tag-badge" style="background-color: #e65100; color: #fff;">Introductory Division (5U - 9U)</span>
+                    <h3><i class="fas fa-star" style="color: #ffb74d;"></i> Starters Program</h3>
+                    <div class="price-display">$200 <span style="font-size: 13px; color: var(--silver);">/ player</span></div>
+                    <p>
+                        Our foundational introductory program designed specifically for young athletes (ages 5U to 9U) to build excitement and essential skills in a supportive environment.
+                    </p>
+                    <ul>
+                        <li><strong>Age Target:</strong> 5U to 9U (Ages 5 - 9)</li>
+                        <li><strong>Competition:</strong> SWOL League Beginner Division</li>
+                        <li><strong>Schedule:</strong> 1x practice per week (1.5 hours)</li>
+                        <li><strong>Includes:</strong> Team T-Shirt & end-of-season recognition</li>
+                    </ul>
+                </div>
+                <a href="#documents" onclick="selectProgramAndGo('Starters Team (5U-9U) ($200)')" class="shop-btn" style="text-align: center; margin-top: 15px; background-color: #e65100;">
+                    Register Starters ($200)
+                </a>
+            </div>
+
+            <!-- BLOCK 5: GROUP TRAINING -->
+            <div class="offer-block highlight-blue">
+                <div>
+                    <span class="tag-badge" style="background-color: #1976d2; color: #fff;">Group Skill Work</span>
+                    <h3><i class="fas fa-dumbbell" style="color: #64b5f6;"></i> Group Skill & Drill Sessions</h3>
+                    <div class="price-display">$100 <span style="font-size: 13px; color: var(--silver);">/ child</span></div>
+                    <p>
+                        High-energy group training environments focusing on technical skill reps, footwork mechanics, shooting discipline, and competitive conditioning.
+                    </p>
+                    <ul>
+                        <li><strong>Core Focus:</strong> High-repetition ball handling, shooting, and footwork</li>
+                        <li><strong>Schedule:</strong> 1 session per week (1.5 Hours)</li>
+                        <li><strong>Environment:</strong> Competitive, fast-paced group drills</li>
+                        <li><strong>Open to:</strong> All skill levels & grade brackets</li>
+                    </ul>
+                </div>
+                <a href="#documents" onclick="selectProgramAndGo('Fall Training Session ($100)')" class="shop-btn" style="text-align: center; margin-top: 15px; background-color: #1976d2;">
+                    Register Group Training
+                </a>
+            </div>
+
+            <!-- BLOCK 6: PRIVATE 1-ON-1 TRAINING -->
+            <div class="offer-block highlight-green">
+                <div>
+                    <span class="tag-badge" style="background-color: #00c853; color: #000;">Personalized Coaching</span>
+                    <h3><i class="fas fa-user-ninja" style="color: #b9f6ca;"></i> Private 1-on-1 Training</h3>
+                    <div class="price-display">$350 <span style="font-size: 13px; color: var(--silver);">/ 5-week package ($175 Deposit)</span></div>
+                    <p>
+                        Customized 1-on-1 private training tailored directly to the athlete's specific position, weaknesses, shooting form, and athletic goals.
+                    </p>
+                    <ul>
+                        <li><strong>Package:</strong> 5-Week Intensive Training Plan</li>
+                        <li><strong>Features:</strong> Video breakdown, custom drill workout progressions, 100% focused attention</li>
+                        <li><strong>Location:</strong> Kunkel Farm & Facility Partners</li>
+                        <li><strong>Deposit Required:</strong> $175 upfront deposit</li>
+                    </ul>
+                </div>
+                <a href="#documents" onclick="selectProgramAndGo('1-on-1 Individual Skill Development Training')" class="shop-btn" style="text-align: center; margin-top: 15px; background-color: #00c853; color: #000;">
+                    Register 1-on-1 Private ($175 Dep)
+                </a>
+            </div>
+
+            <!-- BLOCK 7: FALL BASKETBALL -->
+            <div class="offer-block">
+                <div>
+                    <span class="tag-badge" style="background-color: var(--maroon); color: #fff;">Pre-Season Prep League</span>
+                    <h3><i class="fas fa-basketball-ball" style="color: var(--silver);"></i> Fall Basketball Session</h3>
+                    <div class="price-display">$250 <span style="font-size: 13px; color: var(--silver);">/ player</span></div>
+                    <p>
+                        Our Fall Back-to-School Ball league designed to prepare athletes for school ball tryouts with game-speed reps, conditioning, and structured competition.
+                    </p>
+                    <ul>
+                        <li><strong>Target:</strong> All grades (Elementary through High School)</li>
+                        <li><strong>Season Window:</strong> Early Fall Pre-Season</li>
+                        <li><strong>Includes:</strong> Fall League Competition & Practice sessions</li>
+                        <li><strong>Goal:</strong> Peak conditioning & rhythm before winter school tryouts</li>
+                    </ul>
+                </div>
+                <a href="#documents" onclick="selectProgramAndGo('Fall Back to School Ball ($250)')" class="shop-btn" style="text-align: center; margin-top: 15px;">
+                    Register Fall Ball ($250)
+                </a>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- TAB 3: SPORTS AND ACADEMIC LIAISON (ENHANCED STUDENT ATHLETE PROFILE & COLLEGE BLOCKS) -->
+    <section id="recruiting" class="tab-content">
+        <h2>Sports and Academic Liaison</h2>
+        <p style="color: var(--text-muted);">A college-ready recruiting hub for BattleHard student-athletes. Complete your athletic profile, register for clearinghouses, and search colleges by competition level below.</p>
+
+        <!-- ENHANCED RECRUITING PROFILE FORM -->
+        <div class="card-box" style="border-top: 4px solid var(--maroon);">
+            <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; margin-bottom: 15px;">
+                <h3 style="margin: 0; color: #fff;"><i class="fas fa-id-card" style="color: var(--silver);"></i> Official College-Ready Athlete Profile Card</h3>
+                <button onclick="window.print()" class="shop-btn" style="padding: 8px 16px; font-size: 13px; background-color: #1976d2; border-color: #64b5f6;">
+                    <i class="fas fa-file-pdf"></i> Print / Save PDF One-Pager
+                </button>
+            </div>
+            
+            <form id="recruitingProfileForm" action="https://formsubmit.co/battlehardbasketballclub@gmail.com" method="POST" enctype="multipart/form-data">
+                <input type="hidden" name="_subject" value="🎓 NEW College Recruiting Profile Submitted!">
+                <input type="hidden" name="_template" value="table">
+
+                <!-- SECTION 1: ATHLETE IDENTIFICATION -->
+                <div class="section-title">1. Athlete Identification & Social Scouting</div>
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="recName">Full Athlete Name *</label>
+                        <input type="text" id="recName" name="Athlete Name" placeholder="First and Last Name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="recGradClass">Graduation Class Year *</label>
+                        <select id="recGradClass" name="Grad Class" required>
+                            <option value="" disabled selected>Select Grad Year</option>
+                            <option value="Class of 2025">Class of 2025</option>
+                            <option value="Class of 2026">Class of 2026</option>
+                            <option value="Class of 2027">Class of 2027</option>
+                            <option value="Class of 2028">Class of 2028</option>
+                            <option value="Class of 2029">Class of 2029</option>
+                            <option value="Class of 2030">Class of 2030</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="recTwitter">Twitter / X Handle (Primary Recruiting Social) *</label>
+                        <input type="text" id="recTwitter" name="Twitter Handle" placeholder="@AthleteHandle" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="recPhone">Athlete Phone Number</label>
+                        <input type="tel" id="recPhone" name="Athlete Phone" placeholder="(859) 000-0000">
+                    </div>
+                </div>
+
+                <!-- SECTION 2: PHYSICAL & ATHLETIC METRICS -->
+                <div class="section-title">2. Verified Physical & Athletic Metrics</div>
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="recHeight">Height (ft/in) *</label>
+                        <input type="text" id="recHeight" name="Height" placeholder="e.g. 6'2&quot;" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="recWeight">Weight (lbs) *</label>
+                        <input type="text" id="recWeight" name="Weight" placeholder="e.g. 185 lbs" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="recWingspan">Wingspan (in)</label>
+                        <input type="text" id="recWingspan" name="Wingspan" placeholder="e.g. 6'5&quot;">
+                    </div>
+                    <div class="form-group">
+                        <label for="recReach">Standing Reach</label>
+                        <input type="text" id="recReach" name="Standing Reach" placeholder="e.g. 8'2&quot;">
+                    </div>
+                    <div class="form-group">
+                        <label for="recPrimaryPos">Primary Position *</label>
+                        <select id="recPrimaryPos" name="Primary Position" required>
+                            <option value="Point Guard (PG)">Point Guard (PG)</option>
+                            <option value="Shooting Guard (SG)">Shooting Guard (SG)</option>
+                            <option value="Small Forward (SF)">Small Forward (SF)</option>
+                            <option value="Power Forward (PF)">Power Forward (PF)</option>
+                            <option value="Center (C)">Center (C)</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="recSecPos">Secondary Position</label>
+                        <select id="recSecPos" name="Secondary Position">
+                            <option value="None">None</option>
+                            <option value="Point Guard (PG)">Point Guard (PG)</option>
+                            <option value="Shooting Guard (SG)">Shooting Guard (SG)</option>
+                            <option value="Small Forward (SF)">Small Forward (SF)</option>
+                            <option value="Power Forward (PF)">Power Forward (PF)</option>
+                            <option value="Center (C)">Center (C)</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="recHsTeam">High School Team & Jersey #</label>
+                        <input type="text" id="recHsTeam" name="High School & Jersey #" placeholder="e.g. Cooper HS (#12)">
+                    </div>
+                    <div class="form-group">
+                        <label for="recBhJersey">BattleHard Jersey # *</label>
+                        <input type="text" id="recBhJersey" name="BattleHard Jersey #" placeholder="e.g. #23" required>
+                    </div>
+                </div>
+
+                <!-- SECTION 3: VIDEO & FILM HUB -->
+                <div class="section-title">3. Video & Film Hub (College Coach Evaluation)</div>
+                <div class="form-grid">
+                    <div class="form-group full-width">
+                        <label for="recHudl">Highlight Reel Link (Hudl, YouTube, Synergy) *</label>
+                        <input type="url" id="recHudl" name="Highlight Reel URL" placeholder="https://www.hudl.com/profile/..." required>
+                    </div>
+                    <div class="form-group full-width">
+                        <label for="recFullGame">Full Unedited Game Film Link</label>
+                        <input type="url" id="recFullGame" name="Full Game Film URL" placeholder="https://youtube.com/watch?v=...">
+                    </div>
+                </div>
+
+                <!-- SECTION 4: ACADEMIC STANDINGS & VERIFICATION -->
+                <div class="section-title">4. Academic Eligibility & Verification</div>
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="liaisonGPA">Current GPA (Cumulative) *</label>
+                        <input type="text" id="liaisonGPA" name="Cumulative GPA" placeholder="e.g. 3.65" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="recTestScores">ACT / SAT Score</label>
+                        <input type="text" id="recTestScores" name="ACT or SAT Score" placeholder="e.g. ACT: 24 / SAT: 1180 (or Scheduled Date)">
+                    </div>
+                    <div class="form-group">
+                        <label for="liaisonNCAA">NCAA Eligibility ID #</label>
+                        <input type="text" id="liaisonNCAA" name="NCAA ID #" placeholder="10-Digit NCAA ID">
+                    </div>
+                    <div class="form-group">
+                        <label for="liaisonNAIA">NAIA Eligibility ID #</label>
+                        <input type="text" id="liaisonNAIA" name="NAIA ID #" placeholder="NAIA Eligibility ID">
+                    </div>
+                    <div class="form-group full-width">
+                        <label for="liaisonMajor">Intended College Major(s)</label>
+                        <input type="text" id="liaisonMajor" name="Intended Major" placeholder="e.g. Business Administration, Exercise Science">
+                    </div>
+                    <div class="form-group full-width">
+                        <label for="recHonors">Academic Honors & Extracurriculars</label>
+                        <textarea id="recHonors" name="Academic Honors" rows="2" placeholder="e.g. Honor Roll, National Honor Society, Student Council"></textarea>
+                    </div>
+                    <div class="form-group full-width">
+                        <label for="recTranscript">Upload Unofficial Transcript (PDF/Image)</label>
+                        <input type="file" id="recTranscript" name="Unofficial Transcript File" accept=".pdf,.png,.jpg,.jpeg">
+                    </div>
+                </div>
+
+                <!-- SECTION 5: COACH REFERRAL CONTACTS -->
+                <div class="section-title">5. Coach Referral Contacts</div>
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="recHsCoach">High School Head Coach Name & Phone *</label>
+                        <input type="text" id="recHsCoach" name="HS Head Coach Contact" placeholder="Coach Name - (859) 000-0000" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="recClubCoach">BattleHard Coach Name & Phone *</label>
+                        <input type="text" id="recClubCoach" name="Club Coach Contact" placeholder="Coach Grant - (859) 640-7666" value="Coach Grant - (859) 640-7666" required>
+                    </div>
+                </div>
+
+                <div class="form-group full-width" style="margin-top: 25px;">
+                    <button type="submit" class="shop-btn" style="width: 100%; text-align: center; border: none; cursor: pointer; padding: 14px; font-size: 16px;">
+                        <i class="fas fa-paper-plane"></i> Save & Submit Recruiting Profile
+                    </button>
+                </div>
+            </form>
+        </div>
+
+        <!-- ==========================================================
+             NEW: ATHLETIC CLEARINGHOUSES & ELIGIBILITY BLOCKS
+             ========================================================== -->
+        <h2 style="margin-top: 40px;"><i class="fas fa-user-check"></i> Athletic Eligibility Clearinghouses</h2>
+        <p style="color: var(--text-muted);">High school athletes planning to compete in college must register with official eligibility centers by their junior year.</p>
+
+        <div class="level-grid">
+            <!-- NCAA ELIGIBILITY CENTER -->
+            <div class="level-card badge-eligibility">
+                <div>
+                    <h3><i class="fas fa-shield-alt" style="color: #00bcd4;"></i> NCAA Eligibility Center</h3>
+                    <div class="level-desc">
+                        Official clearinghouse for Division 1 and Division 2 student-athletes. Tracks core high school course requirements, GPA, and amateurism certification.
+                    </div>
+                    <ul>
+                        <li><strong>Requirements:</strong> 16 Core Courses (English, Math, Science, Social Science)</li>
+                        <li><strong>Target Registration:</strong> 10th or 11th Grade</li>
+                        <li><strong>SAT/ACT Code:</strong> 9999</li>
+                    </ul>
+                </div>
+                <a href="https://www.eligibilitycenter.org" target="_blank" class="action-btn">
+                    Register with NCAA Clearinghouse <i class="fas fa-external-link-alt" style="font-size: 11px;"></i>
+                </a>
+            </div>
+
+            <!-- NAIA ELIGIBILITY CENTER -->
+            <div class="level-card badge-eligibility">
+                <div>
+                    <h3><i class="fas fa-certificate" style="color: #00bcd4;"></i> NAIA Eligibility Center (PlayNAIA)</h3>
+                    <div class="level-desc">
+                        Official clearinghouse for all NAIA athletic competition. Allows student-athletes to create an online recruiting profile viewable by 250+ NAIA coaches.
+                    </div>
+                    <ul>
+                        <li><strong>Requirements:</strong> 2.0+ GPA, Top 50% Class Rank, or Qualifying ACT/SAT</li>
+                        <li><strong>Platform:</strong> PlayNAIA Recruiting & Eligibility Hub</li>
+                        <li><strong>Benefits:</strong> Direct connection to NAIA program head coaches</li>
+                    </ul>
+                </div>
+                <a href="https://play.mynaia.org" target="_blank" class="action-btn">
+                    Register with PlayNAIA <i class="fas fa-external-link-alt" style="font-size: 11px;"></i>
+                </a>
+            </div>
+        </div>
+
+        <!-- ==========================================================
+             NEW: COLLEGES & UNIVERSITIES BROKEN DOWN BY LEVEL
+             ========================================================== -->
+        <h2><i class="fas fa-university"></i> Colleges & Universities Directory by Level</h2>
+        <p style="color: var(--text-muted);">Explore competition levels, scholarship structures, and member institutional directories across collegiate basketball.</p>
+
+        <div class="level-grid">
+            <!-- D1 BLOCK -->
+            <div class="level-card badge-d1">
+                <div>
+                    <h3><i class="fas fa-trophy" style="color: #d32f2f;"></i> NCAA Division I (D1)</h3>
+                    <div class="level-desc">
+                        The highest level of collegiate athletics with maximum national TV exposure, elite facilities, and multi-million dollar athletic budgets.
+                    </div>
+                    <ul>
+                        <li><strong>Scholarships:</strong> Full Athletic Scholarships (Head Count Sport: 13 per team)</li>
+                        <li><strong>Competition:</strong> Premier national travel, Power 4 & Mid-Major Conferences</li>
+                        <li><strong>Programs:</strong> 350+ Division I Basketball Institutions</li>
+                    </ul>
+                </div>
+                <a href="https://www.ncaa.org/about-us/membership-directory" target="_blank" class="action-btn">
+                    Browse D1 Colleges Directory <i class="fas fa-external-link-alt" style="font-size: 11px;"></i>
+                </a>
+            </div>
+
+            <!-- D2 BLOCK -->
+            <div class="level-card badge-d2">
+                <div>
+                    <h3><i class="fas fa-medal" style="color: #1976d2;"></i> NCAA Division II (D2)</h3>
+                    <div class="level-desc">
+                        Highly competitive regional athletics offering partial-to-full athletic scholarship packages combined with strong academic focus.
+                    </div>
+                    <ul>
+                        <li><strong>Scholarships:</strong> Partial Athletic Scholarships (Equivalency Model: 10 fulls divided)</li>
+                        <li><strong>Competition:</strong> High-level regional competition with national post-season play</li>
+                        <li><strong>Programs:</strong> 300+ Division II Institutions</li>
+                    </ul>
+                </div>
+                <a href="https://www.ncaa.org/about-us/membership-directory" target="_blank" class="action-btn">
+                    Browse D2 Colleges Directory <i class="fas fa-external-link-alt" style="font-size: 11px;"></i>
+                </a>
+            </div>
+
+            <!-- D3 BLOCK -->
+            <div class="level-card badge-d3">
+                <div>
+                    <h3><i class="fas fa-graduation-cap" style="color: #388e3c;"></i> NCAA Division III (D3)</h3>
+                    <div class="level-desc">
+                        Academics-first model featuring the largest NCAA division. Offers fast-paced competition with high emphasis on degree completion.
+                    </div>
+                    <ul>
+                        <li><strong>Scholarships:</strong> Academic Merit Aid & Need-Based Grants (No Athletic Scholarships)</li>
+                        <li><strong>Competition:</strong> Intense regional leagues with reduced off-season travel</li>
+                        <li><strong>Programs:</strong> 440+ Division III Institutions</li>
+                    </ul>
+                </div>
+                <a href="https://www.ncaa.org/about-us/membership-directory" target="_blank" class="action-btn">
+                    Browse D3 Colleges Directory <i class="fas fa-external-link-alt" style="font-size: 11px;"></i>
+                </a>
+            </div>
+
+            <!-- NAIA BLOCK -->
+            <div class="level-card badge-naia">
+                <div>
+                    <h3><i class="fas fa-star" style="color: #f57c00;"></i> NAIA Athletics</h3>
+                    <div class="level-desc">
+                        Small to mid-sized private and public colleges offering high-level competition comparable to top NCAA D2 and D3 programs.
+                    </div>
+                    <ul>
+                        <li><strong>Scholarships:</strong> Full and Partial Athletic Scholarships available</li>
+                        <li><strong>Flexibility:</strong> Custom eligibility rules and direct coach communications</li>
+                        <li><strong>Programs:</strong> 250+ NAIA Member Institutions</li>
+                    </ul>
+                </div>
+                <a href="https://www.naia.org/schools/index" target="_blank" class="action-btn">
+                    Browse NAIA Member Directory <i class="fas fa-external-link-alt" style="font-size: 11px;"></i>
+                </a>
+            </div>
+
+            <!-- JUCO / NJCAA BLOCK -->
+            <div class="level-card badge-juco">
+                <div>
+                    <h3><i class="fas fa-running" style="color: #7b1fa2;"></i> JUCO / NJCAA (Junior College)</h3>
+                    <div class="level-desc">
+                        2-Year college athletic pathway ideal for players gaining varsity experience, building recruiting film, or raising academic GPAs before transferring.
+                    </div>
+                    <ul>
+                        <li><strong>Scholarships:</strong> Full Tuition, Housing, & Partial Athletic Aid (Divisions I & II)</li>
+                        <li><strong>Transfer Track:</strong> Direct 2-year path into 4-year NCAA D1/D2/NAIA programs</li>
+                        <li><strong>Programs:</strong> 500+ NJCAA Member Colleges</li>
+                    </ul>
+                </div>
+                <a href="https://www.njcaa.org/member_colleges/map" target="_blank" class="action-btn">
+                    Browse JUCO Member Directory <i class="fas fa-external-link-alt" style="font-size: 11px;"></i>
+                </a>
+            </div>
+
+            <!-- ACADEMIC & DEGREE SEARCH BLOCK -->
+            <div class="level-card badge-academic">
+                <div>
+                    <h3><i class="fas fa-search-location" style="color: #e91e63;"></i> Academic Colleges & Majors Search</h3>
+                    <div class="level-desc">
+                        Search colleges based on your academic major, career interests, campus size, geographic location, and admission selectivity.
+                    </div>
+                    <ul>
+                        <li><strong>Search Criteria:</strong> Academic Programs, Major Degrees, Campus Culture</li>
+                        <li><strong>College Board BigFuture:</strong> Comprehensive national college finder database</li>
+                        <li><strong>Focus:</strong> Aligning athletic goals with long-term degree outcomes</li>
+                    </ul>
+                </div>
+                <a href="https://bigfuture.collegeboard.org/college-search" target="_blank" class="action-btn">
+                    Search Academic Colleges <i class="fas fa-external-link-alt" style="font-size: 11px;"></i>
+                </a>
+            </div>
+        </div>
+
+        <!-- SCHOLARSHIPS & FINANCIAL AID PORTAL -->
+        <div class="card-box scholarship-card">
+            <h3 style="margin-top: 0; color: #fff;"><i class="fas fa-hand-holding-usd" style="color: #00d632;"></i> Financial Aid, Scholarships, & Grants</h3>
+            <p style="font-size: 14px; color: var(--text-muted);">Explore federal financial assistance, academic grants, and athletic scholarship resources.</p>
+            
+            <div class="grid-2">
+                <a href="https://studentaid.gov/h/apply-for-aid/fafsa" target="_blank" class="college-card" style="text-decoration: none; display: flex; flex-direction: column; align-items: flex-start;">
+                    <h4 style="margin: 0; color: #fff;">FAFSA (Free Application for Federal Student Aid)</h4>
+                    <span style="font-size: 13px; color: var(--text-muted); margin-top: 5px;">Submit federal applications for grants, work-study, and financial aid packages.</span>
+                </a>
+
+                <a href="https://www.fastweb.com/" target="_blank" class="college-card" style="text-decoration: none; display: flex; flex-direction: column; align-items: flex-start;">
+                    <h4 style="margin: 0; color: #fff;">Fastweb Scholarship Database</h4>
+                    <span style="font-size: 13px; color: var(--text-muted); margin-top: 5px;">Custom online search portal for local and national merit/academic scholarships.</span>
+                </a>
+
+                <a href="https://www.scholarships.com/" target="_blank" class="college-card" style="text-decoration: none; display: flex; flex-direction: column; align-items: flex-start;">
+                    <h4 style="margin: 0; color: #fff;">Scholarships.com Search</h4>
+                    <span style="font-size: 13px; color: var(--text-muted); margin-top: 5px;">Filter millions of institutional grants and scholarships by intended major and state.</span>
+                </a>
+
+                <a href="https://www.ncsasports.org/athletic-scholarships" target="_blank" class="college-card" style="text-decoration: none; display: flex; flex-direction: column; align-items: flex-start;">
+                    <h4 style="margin: 0; color: #fff;">NCSA Athletic Scholarship Guide</h4>
+                    <span style="font-size: 13px; color: var(--text-muted); margin-top: 5px;">Overview of scholarship limits and roster rules by division level.</span>
+                </a>
+            </div>
+        </div>
+
+        <h3>Search Regional Basketball Programs</h3>
+        <input type="text" id="collegeSearch" onkeyup="filterColleges()" placeholder="Search college or conference (e.g., Kentucky, Duke, Xavier, Cincinnati, Thomas More)..." style="width: 100%; padding: 12px; margin-bottom: 15px; background: #2b2b2b; color: white; border: 1px solid var(--silver); border-radius: 4px;">
+
+        <div id="collegeList" class="grid-2" style="margin-bottom: 40px;">
+            <div class="college-card">
+                <div>
+                    <h4 style="margin: 0; color: #fff;">University of Kentucky</h4>
+                    <span style="font-size: 13px; color: var(--text-muted);">NCAA D1 | SEC Conference</span>
+                </div>
+            </div>
+
+            <div class="college-card">
+                <div>
+                    <h4 style="margin: 0; color: #fff;">University of Cincinnati</h4>
+                    <span style="font-size: 13px; color: var(--text-muted);">NCAA D1 | Big 12 Conference</span>
+                </div>
+            </div>
+
+            <div class="college-card">
+                <div>
+                    <h4 style="margin: 0; color: #fff;">Xavier University</h4>
+                    <span style="font-size: 13px; color: var(--text-muted);">NCAA D1 | Big East Conference</span>
+                </div>
+            </div>
+
+            <div class="college-card">
+                <div>
+                    <h4 style="margin: 0; color: #fff;">Thomas More University</h4>
+                    <span style="font-size: 13px; color: var(--text-muted);">NCAA D2 | Great Midwest Athletic Conference</span>
+                </div>
+            </div>
+
+            <div class="college-card">
+                <div>
+                    <h4 style="margin: 0; color: #fff;">Northern Kentucky University (NKU)</h4>
+                    <span style="font-size: 13px; color: var(--text-muted);">NCAA D1 | Horizon League</span>
+                </div>
+            </div>
+
+            <div class="college-card">
+                <div>
+                    <h4 style="margin: 0; color: #fff;">Cincinnati State Technical College</h4>
+                    <span style="font-size: 13px; color: var(--text-muted);">JUCO / NJCAA | Region 12</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- TAB 4: DOCS & REGISTRATION FORM -->
+    <section id="documents" class="tab-content">
+        <h2>Team & Training Registration</h2>
+        <p style="color: var(--text-muted);">Select your program track, player status, and complete the registration agreement below.</p>
+
+        <div class="form-container">
+            <div class="form-header-box">
+                <h3>Battlehard Basketball Club</h3>
+                <h4 style="color: var(--silver); margin-top: 5px;">Master Registration, Waiver & Agreements</h4>
+            </div>
+
+            <!-- FORM INTEGRATED WITH FORMSUBMIT ENDPOINT -->
+            <form id="masterForm" action="https://formsubmit.co/battlehardbasketballclub@gmail.com" method="POST">
+                
+                <!-- FORMSUBMIT ADVANCED CONFIGURATION -->
+                <input type="hidden" name="_subject" value="🏀 NEW BattleHard Player Registration Submitted!">
+                <input type="hidden" name="_template" value="table">
+                <input type="hidden" name="_captcha" value="false">
+                
+                <!-- SECTION 0: PROGRAM SELECTION -->
+                <div class="section-title">Program Selection</div>
+                <div class="form-grid">
+                    <div class="form-group full-width">
+                        <label for="selectedProgram">Select Program / Training Track *</label>
+                        <select id="selectedProgram" name="Selected Program Track" required onchange="updateDepositBanner()">
+                            <option value="" disabled selected>-- Select a Program Track --</option>
+                            <optgroup label="Elementary Division (5U - 9U / 3rd - 5th Grade)">
+                                <option value="Starters Team (5U-9U) ($200)" data-deposit="100">Starters Team (5U to 9U) - SWOL ($200 Fee)</option>
+                                <option value="League Play Team ($375)" data-deposit="187">Elementary League Play Team ($375 Fee)</option>
+                                <option value="Local Tournament Team ($475)" data-deposit="237">Elementary Local Tournament Team ($475 Fee)</option>
+                            </optgroup>
+                            <optgroup label="Middle School Division (6th - 8th Grade)">
+                                <option value="League Play Team ($375)" data-deposit="187">Middle School League Play Team ($375 Fee)</option>
+                                <option value="Local Tournament Team ($475)" data-deposit="237">Middle School Local Tournament Team ($475 Fee)</option>
+                                <option value="Travel Team - New Player ($750)" data-deposit="375">Middle School Travel Team - New ($750 Fee)</option>
+                                <option value="Travel Team - Returning Player ($600)" data-deposit="300">Middle School Travel Team - Returning ($600 Fee)</option>
+                            </optgroup>
+                            <optgroup label="High School Division (9th - 12th Grade)">
+                                <option value="League Play Team ($375)" data-deposit="187">High School League Play Team ($375 Fee)</option>
+                                <option value="Local Tournament Team ($475)" data-deposit="237">High School Local Tournament Team ($475 Fee)</option>
+                                <option value="Travel Team - New Player ($750)" data-deposit="375">High School Travel Team - New ($750 Fee)</option>
+                                <option value="Travel Team - Returning Player ($600)" data-deposit="300">High School Travel Team - Returning ($600 Fee)</option>
+                            </optgroup>
+                            <optgroup label="Fall Programs & Individual Training">
+                                <option value="Fall Back to School Ball ($250)" data-deposit="125">Fall Back to School Ball ($250 Fee)</option>
+                                <option value="Fall Training Session ($100)" data-deposit="100">Fall Training Session - Skills & Conditioning ($100 Fee)</option>
+                                <option value="1-on-1 Individual Skill Development Training" data-deposit="175">1-on-1 Individual Skill Development ($175 Deposit)</option>
+                            </optgroup>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- DYNAMIC DEPOSIT NOTICE BANNER -->
+                <div id="programDepositNotice" style="background: rgba(230, 81, 0, 0.15); border: 1px solid #e65100; border-radius: 6px; padding: 12px 16px; margin-top: 10px; margin-bottom: 20px; color: #ffcc80; font-weight: bold; font-size: 14.5px;">
+                    Please select a program above to view required deposit information.
+                </div>
+
+                <!-- SECTION 1: PLAYER INFO -->
+                <div class="section-title">1. Registration & Player Details</div>
+                <div class="form-grid">
+                    <!-- PLAYER STATUS SELECTOR -->
+                    <div class="form-group full-width">
+                        <label for="playerStatus" style="color: #ffcc80; font-weight: bold;">Player Status *</label>
+                        <select id="playerStatus" name="Player Status" required onchange="toggleEvaluationSection()">
+                            <option value="" disabled selected>-- Is the athlete a New or Returning Player? --</option>
+                            <option value="New Player">New Player (First Time with BattleHard - Evaluation Required)</option>
+                            <option value="Returning Player">Returning Player</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group full-width">
+                        <label for="playerName">Player's Full Legal Name *</label>
+                        <input type="text" id="playerName" name="Player Full Name" placeholder="First and Last Name" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="dob">Date of Birth *</label>
+                        <input type="date" id="dob" name="Player DOB" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="grade">Current Grade / Age Group *</label>
+                        <select id="grade" name="Player Grade" required onchange="checkGradeForNCAA()">
+                            <option value="" disabled selected>Select Grade / Age</option>
+                            <option value="5U - 7U">5U - 7U (Early Elementary)</option>
+                            <option value="8U - 9U">8U - 9U (Elementary)</option>
+                            <option value="3rd Grade">3rd Grade</option>
+                            <option value="4th Grade">4th Grade</option>
+                            <option value="5th Grade">5th Grade</option>
+                            <option value="6th Grade">6th Grade</option>
+                            <option value="7th Grade">7th Grade</option>
+                            <option value="8th Grade">8th Grade</option>
+                            <option value="9th Grade">9th Grade</option>
+                            <option value="10th Grade">10th Grade</option>
+                            <option value="11th Grade">11th Grade</option>
+                            <option value="12th Grade">12th Grade</option>
+                        </select>
+                    </div>
+
+                    <!-- Conditional NCAA ID Field for High School -->
+                    <div id="ncaaGroup" class="form-group full-width hidden">
+                        <label for="ncaaId" style="color: var(--silver-light); font-weight: bold;">NCAA ID * (Required for High School 9th-12th Grade)</label>
+                        <input type="text" id="ncaaId" name="NCAA ID" placeholder="Enter NCAA ID Number">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="teamDivision">Team / Division Preference</label>
+                        <input type="text" id="teamDivision" name="Division Preference" placeholder="e.g. SWOL, Elite Athletics, Elementary 9U">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="school">School Attending *</label>
+                        <input type="text" id="school" name="School" placeholder="Current School Name" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="jerseySize">Shirt / Jersey Size *</label>
+                        <select id="jerseySize" name="Uniform Jersey Size" required>
+                            <option value="" disabled selected>Select Size</option>
+                            <option value="Youth Small">Youth Small</option>
+                            <option value="Youth Medium">Youth Medium</option>
+                            <option value="Youth Large">Youth Large</option>
+                            <option value="Adult Small">Adult Small</option>
+                            <option value="Adult Medium">Adult Medium</option>
+                            <option value="Adult Large">Adult Large</option>
+                            <option value="Adult XL">Adult XL</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="shortSize">Short Size *</label>
+                        <select id="shortSize" name="Uniform Short Size" required>
+                            <option value="" disabled selected>Select Size</option>
+                            <option value="Youth Small">Youth Small</option>
+                            <option value="Youth Medium">Youth Medium</option>
+                            <option value="Youth Large">Youth Large</option>
+                            <option value="Adult Small">Adult Small</option>
+                            <option value="Adult Medium">Adult Medium</option>
+                            <option value="Adult Large">Adult Large</option>
+                            <option value="Adult XL">Adult XL</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group full-width">
+                        <label for="parentName">Parent / Legal Guardian Name(s) *</label>
+                        <input type="text" id="parentName" name="Parent Full Name" placeholder="Parent or Guardian Legal Name" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="parentEmail">Primary Email Address *</label>
+                        <input type="email" id="parentEmail" name="Parent Email" placeholder="name@example.com" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="parentPhone">Primary Phone Number *</label>
+                        <input type="tel" id="parentPhone" name="Parent Phone" placeholder="(859) 000-0000" required>
+                    </div>
+                </div>
+
+                <!-- SECTION 2: NEW PLAYER EVALUATION SECTION (VISIBILITY CONTROLS) -->
+                <div id="evaluationSection" class="hidden">
+                    <div class="section-title">2. New Player Evaluation Details</div>
+                    <p style="color: var(--silver-light); font-size: 13.5px; margin-top: -10px; margin-bottom: 15px;">
+                        This section helps our coaching staff evaluate skills, assign optimal positions, and create balanced team rosters for new athletes joining the club.
+                    </p>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="primaryPosition">Primary Position *</label>
+                            <select id="primaryPosition" name="Evaluation - Primary Position">
+                                <option value="" disabled selected>Select Position</option>
+                                <option value="Point Guard (PG)">Point Guard (PG)</option>
+                                <option value="Shooting Guard (SG)">Shooting Guard (SG)</option>
+                                <option value="Small Forward (SF)">Small Forward (SF)</option>
+                                <option value="Power Forward (PF)">Power Forward (PF)</option>
+                                <option value="Center (C)">Center (C)</option>
+                                <option value="Flexible / Multi-Position">Flexible / Multi-Position</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="dominantHand">Dominant Hand *</label>
+                            <select id="dominantHand" name="Evaluation - Dominant Hand">
+                                <option value="Right">Right</option>
+                                <option value="Left">Left</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="experienceYears">Years of Competitive / AAU Experience</label>
+                            <input type="text" id="experienceYears" name="Evaluation - Years Experience" placeholder="e.g., 2 Years AAU, School Team">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="prevTeams">Previous Leagues or Programs</label>
+                            <input type="text" id="prevTeams" name="Evaluation - Previous Teams" placeholder="e.g., SWOL, Elite Athletics, School">
+                        </div>
+
+                        <div class="form-group full-width">
+                            <label for="playerStrengths">Player Key Strengths</label>
+                            <textarea id="playerStrengths" name="Evaluation - Player Strengths" rows="2" placeholder="e.g., Perimeter shooting, ball handling, defense, leadership, rebounding"></textarea>
+                        </div>
+
+                        <div class="form-group full-width">
+                            <label for="growthAreas">Areas for Growth / Specific Focus Goals</label>
+                            <textarea id="growthAreas" name="Evaluation - Growth Goals" rows="2" placeholder="What key skills does the athlete want to focus on developing this season?"></textarea>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SECTION 3: AGREEMENTS & WAIVER -->
+                <div class="section-title">3. Code of Conduct & Agreements</div>
+                <div class="contract-box">
+                    I acknowledge and agree to respect coaches, officials, and players. I agree to ensure my athlete arrives on time and that all financial obligations, including deposit and club fees, will be satisfied.
+                </div>
+                <label class="checkbox-option">
+                    <input type="checkbox" name="Parent Agreement Signed" value="YES - Agreed" required>
+                    I HAVE READ AND AGREE TO ABIDE BY ALL CLUB POLICIES & CODE OF CONDUCT. *
+                </label>
+
+                <div class="section-title">4. Liability Waiver & Authorization</div>
+                <div class="contract-box">
+                    <strong>WAIVER & RELEASE OF LIABILITY:</strong> In consideration for participation in Battlehard Basketball Club activities, I hereby release, waive, and hold harmless Battlehard Basketball Club, its coaches, and facility owners from any liability or claims.
+                </div>
+                <label class="checkbox-option">
+                    <input type="checkbox" name="Liability Waiver Signed" value="YES - Agreed" required>
+                    I READ, FULLY UNDERSTAND, AND ACCEPT ALL TERMS OF THE LIABILITY WAIVER. *
+                </label>
+
+                <!-- SECTION 5: MEDIA & PHOTO RELEASE -->
+                <div class="section-title">5. Media & Photo Release</div>
+                <div class="contract-box">
+                    <strong>MEDIA & PHOTO RELEASE:</strong> I hereby grant BattleHard Basketball Club and its affiliates the absolute right and permission to photograph, film, and/or record my athlete during club activities for promotional purposes.
+                </div>
+                <label class="checkbox-option">
+                    <input type="checkbox" name="Media Release Signed" value="YES - Agreed" required>
+                    I READ, FULLY UNDERSTAND, AND GRANT PERMISSION FOR MEDIA USE. *
+                </label>
+
+                <!-- SECTION 6: PAYMENT METHOD SELECTION -->
+                <div class="section-title">6. Payment & Deposit Submission</div>
+                <div class="contract-box">
+                    <p style="margin: 0 0 8px 0;"><strong>Deposit & Payment Options:</strong></p>
+                    <p style="margin: 0;">• All details will be emailed directly to <strong>battlehardbasketballclub@gmail.com</strong> upon clicking submit.<br>
+                    • Mandatory Program Deposit / Fees can be sent via <strong>Venmo</strong> or <strong>Zelle</strong> to Coach Dominique Grant (859) 640-7666, or brought in cash/check to practice.</p>
+                </div>
+                <div class="form-grid">
+                    <div class="form-group full-width">
+                        <label for="paymentMethod">Select Preferred Payment Option *</label>
+                        <select id="paymentMethod" name="Payment Method Choice" required>
+                            <option value="" disabled selected>-- Select Payment Method --</option>
+                            <option value="Venmo">Venmo</option>
+                            <option value="Zelle">Zelle</option>
+                            <option value="Cash / Check in Person">Cash / Check in Person</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- SECTION 7: DIGITAL SIGNATURES -->
+                <div class="section-title">7. Digital Signatures</div>
+                <div class="form-grid">
+                    <div class="form-group full-width">
+                        <label for="parentSig">Parent / Guardian Legal Digital Signature *</label>
+                        <input type="text" id="parentSig" name="Parent Digital Signature" placeholder="Type Parent/Guardian Full Name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="sigDate">Date *</label>
+                        <input type="date" id="sigDate" name="Signature Date" required>
+                    </div>
+                </div>
+
+                <!-- SUBMIT BUTTON -->
+                <div style="margin-top: 30px; text-align: center;">
+                    <button type="submit" class="submit-btn" style="width: 100%; max-width: 420px; padding: 15px; font-size: 18px;">
+                        Submit Player Registration
+                    </button>
+                </div>
+            </form>
+        </div>
+    </section>
+
+    <!-- TAB 5: FAN STORE -->
+    <section id="store" class="tab-content">
+        <h2>Official Fan Store</h2>
+        <p style="color: var(--text-muted);">Get your official BattleHard Basketball Club gear below.</p>
+        
+        <div class="card-box" style="background: #ffffff; padding: 20px;">
+            <div id="sqd-container"></div>
+
+            <script src="https://d2c-cta.s3-us-west-2.amazonaws.com/build/sqd/index.js"></script>
+            <script>
+              var SQD = new sqd({
+                container: 'sqd-container',
+                moduleType: 'standard',
+                lockerId: '3132815',
+                environment: 'production',
+                theme: {
+                  fontFamily: "'Lato', sans-serif",
+                  color: '#2D3237',
+                  backgroundColor: '#FFFFFF',
+                  accentColor: '#8BC959'
+                }
+              });
+            </script>
+        </div>
+    </section>
+
+    <!-- JAVASCRIPT LOGIC -->
+    <script>
+        // Set Default Date to Today
+        if(document.getElementById('sigDate')) {
+            document.getElementById('sigDate').valueAsDate = new Date();
+        }
+
+        // Main Tab Switching
+        function openTab(tabId, evt) {
+            document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
+            document.querySelectorAll('.tab-nav button').forEach(btn => btn.classList.remove('active'));
+
+            document.getElementById(tabId).classList.add('active');
+            if (evt && evt.currentTarget) {
+                evt.currentTarget.classList.add('active');
+            } else if (tabId === 'offer') {
+                document.getElementById('tabBtnOffer').classList.add('active');
+            } else if (tabId === 'documents') {
+                document.getElementById('tabBtnDocuments').classList.add('active');
+            } else if (tabId === 'dashboard') {
+                document.getElementById('tabBtnDashboard').classList.add('active');
+            } else if (tabId === 'recruiting') {
+                document.getElementById('tabBtnRecruiting').classList.add('active');
+            } else if (tabId === 'store') {
+                document.getElementById('tabBtnStore').classList.add('active');
+            }
+
+            // Smooth scroll to top of content when changing tabs
+            window.scrollTo({ top: 180, behavior: 'smooth' });
+        }
+
+        // Navigate directly to Docs & Registration tab and auto-select program dropdown
+        function selectProgramAndGo(programValue) {
+            openTab('documents');
+            const selectEl = document.getElementById('selectedProgram');
+            if (selectEl) {
+                selectEl.value = programValue;
+                updateDepositBanner();
+            }
+        }
+
+        // Dynamic Toggle for Player Evaluation Section (New Player vs. Returning Player)
+        function toggleEvaluationSection() {
+            const statusSelect = document.getElementById('playerStatus');
+            const evalSection = document.getElementById('evaluationSection');
+            const primaryPos = document.getElementById('primaryPosition');
+            const domHand = document.getElementById('dominantHand');
+
+            if (statusSelect && statusSelect.value === 'New Player') {
+                evalSection.classList.remove('hidden');
+                primaryPos.setAttribute('required', 'required');
+                domHand.setAttribute('required', 'required');
+            } else {
+                evalSection.classList.add('hidden');
+                primaryPos.removeAttribute('required');
+                domHand.removeAttribute('required');
+            }
+        }
+
+        // Update Dynamic Banner when Program Select Changes & Sync Player Status
+        function updateDepositBanner() {
+            const selectEl = document.getElementById('selectedProgram');
+            const noticeBanner = document.getElementById('programDepositNotice');
+            const playerStatusSelect = document.getElementById('playerStatus');
+            
+            if (selectEl && selectEl.selectedIndex > 0) {
+                const selectedOpt = selectEl.options[selectEl.selectedIndex];
+                const depositAmt = selectedOpt.getAttribute('data-deposit');
+                const progName = selectedOpt.value;
+
+                noticeBanner.innerHTML = `✅ <strong>Selected Program:</strong> ${progName} | <span style="color: #00d632; font-weight: bold;">Mandatory Deposit Required: $${depositAmt}</span>`;
+
+                // Auto-sync status dropdown if program specifies New or Returning
+                if (progName.includes('New Player')) {
+                    playerStatusSelect.value = 'New Player';
+                    toggleEvaluationSection();
+                } else if (progName.includes('Returning Player')) {
+                    playerStatusSelect.value = 'Returning Player';
+                    toggleEvaluationSection();
+                }
+            }
+        }
+
+        // Toggle NCAA ID for High School Grades in Registration Form
+        function checkGradeForNCAA() {
+            const gradeVal = document.getElementById('grade').value;
+            const ncaaGroup = document.getElementById('ncaaGroup');
+            const ncaaInput = document.getElementById('ncaaId');
+
+            if (['9th Grade', '10th Grade', '11th Grade', '12th Grade'].includes(gradeVal)) {
+                ncaaGroup.classList.remove('hidden');
+            } else {
+                ncaaGroup.classList.add('hidden');
+                ncaaInput.value = '';
+            }
+        }
+
+        // College Search Directory Filter
+        function filterColleges() {
+            const input = document.getElementById('collegeSearch').value.toLowerCase();
+            const cards = document.querySelectorAll('#collegeList .college-card');
+
+            cards.forEach(card => {
+                card.style.display = card.innerText.toLowerCase().includes(input) ? "flex" : "none";
+            });
+        }
+    </script>
+
+    <!-- GAMECHANGER SCHEDULE & LIVE SCORE SDK -->
+    <script src="https://widgets.gc.com/static/js/sdk.v1.js"></script>
+    <script>
+        window.GC.team.schedule.init({
+            target: "#gc-schedule-widget-fie6",
+            widgetId: "4d151fbc-a5f7-4269-af65-246e9b1f74a1",
+            maxVerticalGamesVisible: 4,
+        })
+    </script>
+</body>
+</html>
