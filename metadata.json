@@ -1,0 +1,8 @@
+{
+  "name": "BattleHard Basketball Club",
+  "description": "Official website for BattleHard Basketball Club featuring tournament schedules, programs, recruiting hub, and player registration.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
